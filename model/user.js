@@ -89,7 +89,8 @@ module.exports.unlike = function (whoUnlike,pin,ofWho, callback) {
         if(data) {
             for (var i = 0; i < data.pin.length; i++) {
                 for (var x = 0; x < data.pin[i].like.length; x++) {
-                    if(data.pin[i].like[x] == whoUnlike) data.pin[i].like.splice(x,1);
+                    if(data.pin[i].like[x] == whoUnlike && data.pin[i].url == pin) 
+                    data.pin[i].like.splice(x,1);
                 }
             }
             ModelClass.find({username: ofWho}).remove(function(err){

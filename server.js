@@ -62,7 +62,7 @@ app.get("/twitter/return", passport.authenticate("twitter", {
             user.update({username: username},{avatar_url: avatar_url}, function(err,affected,resp){
                 if(err) throw err;
             })
-            res.redirect("/");
+            res.redirect("/home");
         } else {
             var newUser = new user ({
                 username: username,
