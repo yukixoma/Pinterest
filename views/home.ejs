@@ -44,12 +44,14 @@
 </div>
 
 <script>
-    $("div.container").masonry({
-        columnWidth: "div.block",
-        itemSelector: "div.block",
-        columnWidth: 100,
-        fitWidth: true
-    });
+    $(window).on("load",function(){
+        $("div.container").masonry({
+            columnWidth: "div.block",
+            itemSelector: "div.block",
+            columnWidth: 100,
+            fitWidth: true
+        })
+    })
 
     $("img").on("error", function(){
         $(this).attr("src","broken.png");

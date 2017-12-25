@@ -71,26 +71,33 @@
 </div>
 
 <script>
-    $("div.container").masonry({
-        columnWidth: "div.block",
-        itemSelector: "div.block",
-        columnWidth: 100,
-        fitWidth: true
-    })
+    $(window).on("load",function(){
+        $("div.container").masonry({
+            columnWidth: "div.block",
+            itemSelector: "div.block",
+            columnWidth: 100,
+            fitWidth: true
+        })
+    });
+
     if(!username) {
         $("button[name=like]").attr("disabled","disabled");
-    } 
+    };
+
     $(".info").mouseenter(function () {
         $(this).find(".who").show();
     });
+
     $(".info").mouseleave(function(){
         $(".who").hide();
     });
+
     $("img").on("error", function(){
         $(this).attr("src","broken.png");
     });
+
     $("img.avatar").on("click", function(){
         var ofWho = $(event.target).attr("placeholder");
         window.location = "./browse/" + ofWho;
-    })
+    });
 </script>
