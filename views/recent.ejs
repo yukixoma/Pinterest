@@ -81,7 +81,7 @@
         $("button[name=like]").attr("disabled","disabled");
     } 
     $(".info").mouseenter(function () {
-        $(event.target).show();
+        $(this).find(".who").show();
     });
     $(".info").mouseleave(function(){
         $(".who").hide();
