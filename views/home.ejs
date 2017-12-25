@@ -1,0 +1,53 @@
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script> var pin =  <%-JSON.stringify(pin)%> </script>
+<style>
+    img {
+        max-width: 350px;
+        max-height:350px;
+        width:auto;
+        height:auto;
+        border-radius: 2px;
+    }
+    .block {
+        background-color: white;
+        margin: 5px 5px 5px 5px;
+        padding: 10px 10px 10px 10px;
+        border-radius: 5px;
+    }
+    .container {
+        min-width: 100%;
+        margin: 0 auto;
+    }
+    body {
+        background-color: grey;
+    }
+</style>
+<div class="container">
+    <div class="col-lg-12">
+        <div class="block">
+            <form class="text-center" action="/add">
+                <input class="form-control " placeholder="Description" name="description" id="name">
+                <input class="form-control my-2" placeholder="Pic's url" name="url" id="url">
+                <button class="btn btn-outline-success my-1" type="submit" id="add"> Add</button>
+            </form>
+        </div>
+        <% pin.forEach(function (pin) { %>
+        <div class="block" align="center">
+            <img src="<%=pin.url%>" >
+            <p> <%=pin.description%> </p>
+            <form action="/remove" method="get">
+                <button class="btn btn-outline-danger" name="remove" value="<%=pin.url%>"> Remove</button>
+            </form>
+        </div>
+        <% }); %>
+    </div>
+</div>
+
+<script>
+    $("div.container").masonry({
+        columnWidth: "div.block",
+        itemSelector: "div.block",
+        columnWidth: 100,
+        fitWidth: true
+    })
+</script>

@@ -92,16 +92,93 @@ app.get("/", function(req, res) {
     res.render("index" , {username: username});
 })
 
+app.get("/home", function(req,res){
+    if(req.user) {
+        var username = req.user.username;
+        user.findOne({username: username},function(err,data){
+            if(err) throw err;
+            if(data) res.render("home", {
+                username: req.user.username,
+                pin: data.pin
+            });
+        })
+    } else {
+        res.redirect("/");
+    }
+})
 
+app.get("/add", function(req,res){
+    if(req.user) {
+        var description = req.query.description;
+        var url         = req.query.url;
+        var add = {description : description, url: url, like: []};
+        var username = req.user.username;
+        user.add(username,add,function(err,result){
+            if(err) throw err;
+            console.log(result);
+            res.redirect("/home");
+        })
+    }
+})
 
+app.get("/remove", function(req,res){
+    if(req.user) {
+        var username = req.user.username;
+        var remove   = req.query.remove;
+        user.remove(username,remove,function(err,result){
+            if(err) throw err;
+            console.log(result);
+            res.redirect("/home");
+        })
+    }
+})
 
+app.get("/recent", function(req,res){
+    var pin = [];
+    var username = req.user? req.user.username : null;
+    user.find({},function(err,data){
+        if(err) throw err;
+        data.forEach(function(element){
+            if(element.pin.length > 0) {
+                element.pin.forEach(function(e) {
+                    var isLiked = false;
+                    for( var i = 0; i < e.like.length; i++) {
+                        if (e.like[i] == username) isLiked = true;
+                    }
+                    e.ofWho = element.username;
+                    e.avatar_url = element.avatar_url;
+                    e.isLiked = isLiked;
+                    pin.push(e);
+                })
+            }
+        })
+        res.render("recent",{username:username, pin: pin});
+    })
+})
 
+app.get("/like",function(req,res){
+    if(req.user) {
+        var whoLike     = req.user.username;
+        var pin         = req.query.like.split(",")[0];
+        var ofWho       = req.query.like.split(",")[1];
+        user.like(whoLike,pin,ofWho,function(err,result){
+            if(err) throw err;
+            res.redirect("/recent");
+        })
+    }
+})
 
-
-
-
-
-
+app.get("/unlike", function(req,res){
+    if(req.user) {
+        var whoUnlike = req.user.username;
+        var pin = req.query.unlike.split(",")[0];
+        var ofWho =  req.query.unlike.split(",")[1];
+        user.unlike(whoUnlike,pin,ofWho, function(err,result){
+            if(err) throw err;
+            res.redirect("recent");
+        })
+    }
+})
 
 
 

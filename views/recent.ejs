@@ -1,0 +1,74 @@
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script> var pin =  <%-JSON.stringify(pin)%> </script>
+
+<style>
+    img {
+        max-width: 350px;
+        max-height:350px;
+        width:auto;
+        height:auto;
+        border-radius: 2px;
+    }
+    .block {
+        background-color: white;
+        margin: 5px 5px 5px 5px;
+        padding: 10px 10px 10px 10px;
+        border-radius: 5px;
+    }
+    .container {
+        min-width: 100%;
+        margin: 0 auto;
+    }
+    body {
+        background-color: grey;
+    }
+</style>
+<div class="container">
+    <div class="col-lg-12">
+        <% pin.forEach(function (pin) { %>
+        <div class="block" align="center">
+            <img src="<%=pin.url%>" >
+            <p> <%=pin.description%> </p>
+            <div>
+                <div>
+                    <%= pin.like.length %>
+                </div>
+                
+                <div class="row">
+                    <div class="col-sm-3 text-left">
+                        <img src="<%= pin.avatar_url %>" placeholder="<%= pin.ofWho %>">
+                    </div>
+                    <div class="col-sm-6 text-center">
+                    <% if(pin.isLiked) { %>
+                        <form action="/unlike" method="get" >
+                            <button class="btn btn-danger" name="unlike" value="<%= pin.url %>,<%= pin.ofWho %>"> 
+                                <i class="fa fa-heart"></i>
+                            </button>
+                        </form>
+                    <% } else {%>              
+                        <form action="/like" method="get" >
+                            <button class="btn btn-outline-danger" name="like" value="<%= pin.url %>,<%= pin.ofWho %>"> 
+                                <i class="fa fa-heart"></i>
+                            </button>
+                        </form>
+                    <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+</div>
+
+<script>
+    $("div.container").masonry({
+        columnWidth: "div.block",
+        itemSelector: "div.block",
+        columnWidth: 100,
+        fitWidth: true
+    })
+    if(!username) {
+        $("button[name=like]").attr("disabled","disabled");
+    } 
+</script>

@@ -6,18 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Clone Pinterest</title>
     <link rel="stylesheet" href="/lib/bootstrap.min.css" >
-   
     <script src="/lib/jquery-3.1.1.slim.min.js" ></script>
     <script src="/lib/tether.min.js" ></script>
     <script src="/lib/bootstrap.min.js" ></script>
     <script> var username = <%-JSON.stringify(username)%> </script>
+    <style>
+        html {
+            width: 100%;
+            margin: auto;
+        }
+        body {
+            width: 100%;
+            margin: auto;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" > Amazing Vietnam </a>
+        <a class="navbar-brand" href="/"> Amazing Vietnam </a>
   
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -36,15 +45,22 @@
                 </form>
             <% } else { %>
                 <form class="form-inline my-2 my-lg-0" action="/twitter/login">
-                    <button class="btn btn-outline-success my-2 my-sm-0  mr-sm-2" type="submit"> Login</button>
+                    <button class="btn btn-outline-info my-2 my-sm-0  mr-sm-2" type="submit"> 
+                        <i class="fa fa-twitter"></i> Login
+                    </button>
                 </form>
             <% } %>
         </div>
     </nav>
+<!-- Rendered file will be here -->
     <div>
         <%- body %>
     </div>
-    <nav class="navbar fixed-bottom navbar-inverse bg-primary">
+
+
+
+<!-- Footer navbar -->    
+    <nav class="navbar fixed-bottom navbar-inverse bg-info">
         <div class="row" style="color:white">
             <div class="col-lg-4">
                 Design by Yukixoma
