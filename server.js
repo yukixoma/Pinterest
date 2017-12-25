@@ -59,6 +59,9 @@ app.get("/twitter/return", passport.authenticate("twitter", {
         if(err) throw err;
         if(data) {
             console.log("registed user logging");
+            user.update({username: username},{avatar_url: avatar_url}, function(err,affected,resp){
+                if(err) throw err;
+            })
             res.redirect("/");
         } else {
             var newUser = new user ({
