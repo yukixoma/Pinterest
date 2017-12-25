@@ -36,16 +36,22 @@
             <ul class="navbar-nav mr-auto">
                 <% if(username) { %>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/home"> Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/home"> 
+                        <i class="fa fa-home" aria-hidden="true"></i> Home <span class="sr-only">(current)</span>
+                    </a>
                 </li>
                 <% } %>
-                <li class="nav-item">
-                    <a class="nav-link" href="/recent"> Recent pin</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/recent"> 
+                        <i class="fa fa-pinterest" aria-hidden="true"></i> Recent pin
+                    </a>
                 </li>
             </ul>
             <% if(username) { %>
                 <form action="/logout" method="get" class="form-inline my-2 my-lg-0">
-                    <button class="btn btn-outline-danger" type="submit" > Logout</button>
+                    <button class="btn btn-outline-danger" type="submit" > 
+                        <i class="fa fa-sign-out" aria-hidden="true"> </i> Logout
+                    </button>
                 </form>
             <% } else { %>
                 <form class="form-inline my-2 my-lg-0" action="/twitter/login">
