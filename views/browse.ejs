@@ -34,7 +34,7 @@
     <div class="col-lg-12" id="all-pin">
         <% pin.forEach(function (pin) { %>
         <div class="block" align="center">
-            <img src="<%=pin.url%>">
+            <img src="<%=pin.url%>" >
             <p> <%=pin.description%> </p>
             <div>
                 <div>
@@ -43,7 +43,7 @@
                 
                 <div class="row">
                     <div class="col-sm-3 text-left info">
-                        <img class="avatar" src="<%= pin.avatar_url %>" placeholder="<%= pin.ofWho %>">
+                        <img src="<%= pin.avatar_url %>" placeholder="<%= pin.ofWho %>">
                         <div class="who">
                             @<%= pin.ofWho %>
                         </div>
@@ -89,8 +89,4 @@
     $("img").on("error", function(){
         $(this).attr("src","broken.png");
     });
-    $("img.avatar").on("click", function(){
-        var ofWho = $(event.target).attr("placeholder");
-        window.location = "./browse/" + ofWho;
-    })
 </script>

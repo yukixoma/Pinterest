@@ -183,6 +183,26 @@ app.get("/unlike", function(req,res){
     }
 })
 
-
+app.get("/browse/:ofWho",function(req,res){
+    var username = req.user? req.user.username: null;
+    var ofWho = req.params.ofWho;
+    var pin = [];
+    user.findOne({username: ofWho},function(err,data){
+        if(err) throw err;
+        if(data) {
+            data.pin.forEach(function(e){
+                var isLiked = false;
+                for( var i = 0; i < e.like.length; i++) {
+                    if (e.like[i] == username) isLiked = true;
+                }
+                e.ofWho = data.username;
+                e.avatar_url = data.avatar_url;
+                e.isLiked = isLiked;
+                pin.push(e);
+            })
+        }
+        res.render("browse", {username : username, pin: pin});
+    })
+})
 
 app.listen(process.env.PORT || 3000);

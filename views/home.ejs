@@ -49,5 +49,10 @@
         itemSelector: "div.block",
         columnWidth: 100,
         fitWidth: true
-    })
+    });
+
+    $("img").on("error", function(){
+        $(this).attr("src","broken.png");
+    });
+
 </script>
